@@ -14,6 +14,8 @@ const useGetProjects = () => {
           "Content-Type": "application/json",
         },
       });
+      console.log(res);
+      
 
       const contentType = res.headers.get("content-type");
       if (!res.ok) {
@@ -22,6 +24,8 @@ const useGetProjects = () => {
 
       if (contentType && contentType.includes("application/json")) {
         const data = await res.json();
+        console.log(data);
+        
         if (data.error) {
           throw new Error(data.error);
         }
