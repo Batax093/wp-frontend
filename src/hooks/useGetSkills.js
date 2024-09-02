@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import toast from "react-hot-toast";
+import apiProvider from "../config/handleAPI";
 
 const useGetSkills = () => {
   const [loading, setLoading] = useState(false);
@@ -8,12 +9,7 @@ const useGetSkills = () => {
   const getSkills = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/skill/get-skill", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await apiProvider.GetSkills();
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }

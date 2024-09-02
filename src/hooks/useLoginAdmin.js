@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
+import apiProvider from "../config/handleAPI";
 
 const useLoginAdmin = () => {
   const [loading, setLoading] = useState(false);
@@ -11,13 +12,10 @@ const useLoginAdmin = () => {
     if (!success) return;
     setLoading(true);
     try {
-      const res = await fetch("/api/admin-api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const res = await apiProvider.LoginAdmin(email, password);
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
       const data = await res.json();
       if (data.errorr) {
         throw new Error(data.errorr);
