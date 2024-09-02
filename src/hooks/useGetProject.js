@@ -14,7 +14,7 @@ const useGetProjects = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log(res);
+      console.log("testing:",res.data);
       
 
       const contentType = res.headers.get("content-type");
