@@ -23,8 +23,8 @@ function App() {
               element={<Home />}
             />
             <Route
-              path="/theemarloes"
-              element={authUser ? <Navigate to={"/"} /> : <AdminLogin />}
+              path="/fredrikpakpahan"
+              element={ authUser ? <Navigate to="/" /> : <AdminLogin />}
             />
           </Routes>
         </div>
