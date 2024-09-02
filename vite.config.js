@@ -9,6 +9,7 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: 'https://wp-backend-ashy.vercel.app/',
+        changeOrigin: true
       }
     }
   }
