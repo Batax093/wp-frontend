@@ -22,6 +22,8 @@ const useGetProjects = () => {
 
       if (contentType && contentType.includes("application/json")) {
         const data = await res.json();
+        console.log("Received JSON response:", data);
+        
         
         if (data.error) {
           throw new Error(data.error);
