@@ -8,7 +8,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'https://wp-backend-three.vercel.app/',
+        target: 'https://wp-backend-ashy.vercel.app/',
       }
     }
   }
