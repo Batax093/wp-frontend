@@ -57,13 +57,13 @@ const apiProvider = {
       return err;
     });
   },
-  PostProjects: async (params) => {
+  PostProjects: async ({ title, description, image, github }) => {
     return API("projects", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(params),
+      body: JSON.stringify({ title, description, image, github }),
     });
   },
   DeleteProjects: async (slug) => {
@@ -93,13 +93,13 @@ const apiProvider = {
       },
     });
   },
-  PostSkills: async (params) => {
-    return API("skill", {
+  PostSkills: async ({ name, icon }) => {
+    return API("skill/add-skill", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(params),
+      body: JSON.stringify({ name, icon }),
     });
   },
   DeleteSkills: async (slug) => {
@@ -140,13 +140,13 @@ const apiProvider = {
   },
 
   // Feedback
-  PostFeedback: async (params) => {
+  PostFeedback: async ({ name, email, message }) => {
     return API("feedback", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(params),
+      body: JSON.stringify({ name, email, message }),
     });
   },
   
