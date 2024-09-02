@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
-import apiProvider from "../config/handleAPI";
 
 const useLogoutAdmin = () => {
   const [loading, setLoading] = useState(false);
@@ -10,10 +9,12 @@ const useLogoutAdmin = () => {
   const logoutAdmin = async () => {
     setLoading(true);
     try {
-      const res = await apiProvider.LogoutAdmin();
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
+      const res = await fetch("https://wp-backend-ashy.vercel.app/api/admin/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = await res.json();
       if (data.error) {
         throw new Error(data.error);

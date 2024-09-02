@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
 import toast from "react-hot-toast";
-import apiProvider from "../config/handleAPI";
 
 const useGetProjects = () => {
   const [loading, setLoading] = useState(false);
@@ -9,7 +8,12 @@ const useGetProjects = () => {
   const getProjects = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await apiProvider.GetProjects();
+      const res = await fetch("https://wp-backend-ashy.vercel.app/api/projects/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }

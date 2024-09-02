@@ -1,6 +1,5 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import apiProvider from "../config/handleAPI";
 
 const usePostSkill = () => {
   const [loading, setLoading] = useState(false);
@@ -8,7 +7,13 @@ const usePostSkill = () => {
   const postSkill = async ({ name, icon }, resetForm) => {
     setLoading(true);
     try {
-      const res = await apiProvider.PostSkill(name, icon);
+      const res = await fetch("https://wp-backend-ashy.vercel.app/api/skill/add-skill", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, icon }),
+      });
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }

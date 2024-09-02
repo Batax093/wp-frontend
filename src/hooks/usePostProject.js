@@ -1,6 +1,5 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import apiProvider from "../config/handleAPI";
 
 const usePostProject = () => {
   const [loading, setLoading] = useState(false);
@@ -8,7 +7,13 @@ const usePostProject = () => {
   const postProject = async ({ title, description, image, github }, resetForm) => {
     setLoading(true);
     try {
-      const res = await apiProvider.PostProject(title, description, image, github);
+      const res = await fetch("https://wp-backend-ashy.vercel.app/api/projects/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title, description, image, github }),
+      });
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }

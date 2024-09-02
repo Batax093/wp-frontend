@@ -1,6 +1,5 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import apiProvider from "../config/handleAPI";
 
 const usePostContact = () => {
   const [loading, setLoading] = useState(false);
@@ -11,7 +10,13 @@ const usePostContact = () => {
 
     setLoading(true);
     try {
-      const res = await apiProvider.PostContact(name, email, message);
+      const res = await fetch("https://wp-backend-ashy.vercel.app/api/feedback/add-feedback", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
 
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);

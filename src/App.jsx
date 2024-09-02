@@ -1,11 +1,11 @@
 import Home from "./pages/home/Home";
+import AdminLogin from "./pages/admin/AdminLogin";
 import "./App.css";
 
 import { Routes, Route } from "react-router-dom";
 
 import { ParallaxProvider } from "react-scroll-parallax";
 import { Toaster } from "react-hot-toast";
-import AdminLogin from "./pages/admin/AdminLogin";
 
 function App() {
   return (
