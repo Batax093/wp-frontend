@@ -23,7 +23,7 @@ function App() {
               element={<Home />}
             />
             <Route
-              path="/fredrikpakpahan"
+              path="/theemarloes"
               element={ authUser ? <Navigate to="/" /> : <AdminLogin />}
             />
           </Routes>
