@@ -8,7 +8,7 @@ const useGetProjects = () => {
   const getProjects = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/projects/", {
+      const res = await fetch("https://wp-backend-ashy.vercel.app/api/projects/", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
