@@ -7,7 +7,7 @@ const useLogout = () => {
   const { setAuthUser } = useAuthContext();
   const logout = async () => {
     try {
-      const res = await fetch("/api/admin-api/logout", {
+      const res = await fetch("https://wp-backend-ashy.vercel.app/api/admin-api/logout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
