@@ -48,7 +48,7 @@ const LandingPage = () => {
         <div className="name-container w-full md:w-full lg:w-full sticky top-0 z-10">
           <Parallax translateX={["-30vw", "35vw"]}>
             <h1
-              className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl h-36"
+              className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl h-36 font-bold"
               style={{ color: calculateColor() }}
             >
               {`HOLA I'M`}&nbsp;<span className="name-slide">{names[nameIndex]}</span>
@@ -56,7 +56,7 @@ const LandingPage = () => {
           </Parallax>
         </div>
 
-        <div className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl pt-5 w-3/4 md:w-2/3 lg:w-1/2 text-start">
+        <div className="font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl pt-5 w-3/4 md:w-2/3 lg:w-1/2 text-start">
           <Parallax translateX={["30vw", "-65vw"]}>
             {text.map((sentence, index) => (
               <p
