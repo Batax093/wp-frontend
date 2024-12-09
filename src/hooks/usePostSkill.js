@@ -7,7 +7,7 @@ const usePostSkill = () => {
   const postSkill = async ({ name, icon }, resetForm) => {
     setLoading(true);
     try {
-      const res = await fetch("https://wp-backend-ashy.vercel.app/api/skill/add-skill", {
+      const res = await fetch("http://localhost:5000/api/skill/add-skill", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

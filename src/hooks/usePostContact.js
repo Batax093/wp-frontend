@@ -10,7 +10,7 @@ const usePostContact = () => {
 
     setLoading(true);
     try {
-      const res = await fetch("https://wp-backend-ashy.vercel.app/api/feedback/add-feedback", {
+      const res = await fetch("http://localhost:5000/api/feedback/add-feedback", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

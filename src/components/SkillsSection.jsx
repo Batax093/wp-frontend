@@ -16,14 +16,15 @@ const SkillsSection = () => {
   const handleIconChange = async (e) => {
     const file = e.target.files[0];
     const base64Icon = await convertToBase64(file);
-    setIcon(base64Icon);
+    setIcon(base64Icon);    
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await postSkill({ name, icon }, async () => {
-      setName("");
-      setIcon(null);
+    const skillsdata = { name, icon };
+    await postSkill(skillsdata, async () => {
+      console.log(skillsdata);
+      
       document.getElementById("skill_modal").close();
       toast.success("Skill added successfully!");
       await getSkills();

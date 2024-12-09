@@ -8,20 +8,27 @@ const useLoginAdmin = () => {
 
   const loginAdmin = async (email, password) => {
     const success = handleInputErrors(email, password);
-    if (!success) return;
+    if (!success) return; // Hentikan proses jika ada error input
     setLoading(true);
     try {
-      const res = await fetch("https://wp-backend-ashy.vercel.app/api/admin-api/login", {
+      const res = await fetch("http://localhost:5000/api/admin-api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+
       const data = await res.json();
-      if (data.errorr) {
+
+      if (data.errorr) { // Pastikan data error ada dan tidak kosong
         throw new Error(data.errorr);
       }
+
       toast.success("Login successful");
       localStorage.setItem("AdminUser", JSON.stringify(data));
       setAuthUser(data);
@@ -44,6 +51,5 @@ function handleInputErrors(email, password) {
     toast.error("Please fill in all fields");
     return false;
   }
-
   return true;
 }

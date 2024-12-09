@@ -8,7 +8,7 @@ const useGetSkills = () => {
   const getSkills = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch("https://wp-backend-ashy.vercel.app/api/skill/get-skill", {
+      const res = await fetch("http://localhost:5000/api/skill/get-skill", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

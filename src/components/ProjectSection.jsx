@@ -6,31 +6,33 @@ import toast from "react-hot-toast";
 import { Parallax } from "react-scroll-parallax";
 import convertToBase64 from "../utils/convert64base";
 import { useAuthContext } from "../context/AuthContext";
+import slugify from "../utils/slugify";
 
-const ProjectSection = () => {  
-  // Fetch and manage project data
+const ProjectSection = () => {
   const { loading: getLoading, projects, getProjects } = useGetProjects();
   const { loading: postLoading, postProject } = usePostProject();
   const { loading: deleteLoading, deleteProject } = useDeleteProject();
   const { authUser } = useAuthContext();
+  const resetForm = () => {
+    setTitle("");
+    setDescription("");
+    setGithub("");
+  };
 
-  // Form state for adding new projects
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [github, setGithub] = useState("");
 
-  // Handle image conversion
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     const base64Image = await convertToBase64(file);
     setImage(base64Image);
   };
 
-  // Handle form submission (add new project)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const projectData = { title, description, image, github };
+    const projectData = { title, description, github, image};    
 
     await postProject(projectData, async () => {
       resetForm();
@@ -40,23 +42,18 @@ const ProjectSection = () => {
     });
   };
 
-  // Reset form
-  const resetForm = () => {
-    setTitle("");
-    setDescription("");
-    setImage(null);
-    setGithub("");
-  };
 
-  // Handle project deletion
-  const handleDelete = async (projecttitle) => {
-    await deleteProject(projecttitle, async () => {
+  const handleDelete = async (slug) => {
+    if (!slug) return;
+    const normalizedSlug = encodeURIComponent(slugify(slug));
+
+    await deleteProject(normalizedSlug, async () => {
       toast.success("Project deleted successfully!");
+      document.getElementById("project_modal").close();
       await getProjects();
     });
   };
 
-  // JSX Render
   return (
     <div className="w-full mt-32 flex justify-center flex-col items-center py-32 md:py-48 lg:py-64">
       {authUser && (
@@ -70,8 +67,12 @@ const ProjectSection = () => {
       )}
 
       {/* Project Submission Modal */}
-      <dialog id="project_modal" className="modal modal-bottom sm:modal-middle">
-        <form onSubmit={handleSubmit} className="modal-box space-y-4 bg-yellow-500">
+      <dialog
+        id="project_modal"
+        className="modal modal-bottom sm:modal-middle">
+        <form
+          onSubmit={handleSubmit}
+          className="modal-box space-y-4 bg-yellow-500">
           <button
             type="button"
             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
@@ -129,7 +130,10 @@ const ProjectSection = () => {
               className="flex justify-center">
               <div className="card bg-yellow-500 w-full shadow-xl transform transition-transform duration-300 hover:scale-105">
                 <figure>
-                  <img src={project.image} alt={project.title} />
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                  />
                 </figure>
                 <div className="card-body">
                   <h2 className="card-title text-black">{project.title}</h2>
@@ -142,11 +146,13 @@ const ProjectSection = () => {
                       className="btn btn-primary bg-white border-none hover:bg-yellow-300">
                       Github
                     </a>
-                    <button
-                      className="btn btn-primary bg-red-500 border-none hover:bg-red-300"
-                      onClick={() => handleDelete(project.title)}>
-                      Delete
-                    </button>
+                    {authUser && (
+                      <button
+                        className="btn btn-primary bg-red-500 border-none hover:bg-red-300"
+                        onClick={() => handleDelete(project.title)}>
+                        {deleteLoading ? <span className="loading loading-spinner loading-lg"></span> : "Delete"}
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

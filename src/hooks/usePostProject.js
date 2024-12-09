@@ -4,15 +4,15 @@ import toast from "react-hot-toast";
 const usePostProject = () => {
   const [loading, setLoading] = useState(false);
 
-  const postProject = async ({ title, description, image, github }, resetForm) => {
+  const postProject = async ({ title, description, github, image }, resetForm) => {
     setLoading(true);
     try {
-      const res = await fetch("https://wp-backend-ashy.vercel.app/api/projects/", {
+      const res = await fetch("http://localhost:5000/api/projects/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title, description, image, github }),
+        body: JSON.stringify({ title, description, github, image }),
       });
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);

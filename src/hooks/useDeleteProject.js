@@ -1,15 +1,13 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import slugify from "../utils/slugify";
 
-const useDeleteProject = (slug) => {
+const useDeleteProject = () => {
     const [loading, setLoading] = useState(false);
-
-    const deleteProject = async () => {
+    
+    const deleteProject = async (slug) => {
         setLoading(true);
         try {
-            const normalizedSlug = encodeURIComponent(slugify(slug));
-            const res = await fetch(`https://localhost:5000/api/projects/${normalizedSlug}`, {
+            const res = await fetch(`http://localhost:5000/api/projects/${slug}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
