@@ -142,11 +142,13 @@ const ProjectSection = () => {
                       className="btn btn-primary bg-white border-none hover:bg-yellow-300">
                       Github
                     </a>
-                    <button
-                      className="btn btn-primary bg-red-500 border-none hover:bg-red-300"
-                      onClick={() => handleDelete(project.title)}>
-                      Delete
-                    </button>
+                    {authUser && (
+                      <button
+                        className="btn btn-primary bg-white border-none hover:bg-yellow-300"
+                        onClick={() => handleDelete(project.title)}>
+                        Delete
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
