@@ -1,39 +1,62 @@
+import { useState } from "react";
 import useGetProjects from "../hooks/useGetProject";
 import usePostProject from "../hooks/usePostProject";
+import useDeleteProject from "../hooks/useDeleteProject";
 import toast from "react-hot-toast";
-import { useState } from "react";
 import { Parallax } from "react-scroll-parallax";
 import convertToBase64 from "../utils/convert64base";
 import { useAuthContext } from "../context/AuthContext";
 
-const ProjectSection = () => {
-  const { loading: postLoading, postProject } = usePostProject();
+const ProjectSection = () => {  
+  // Fetch and manage project data
   const { loading: getLoading, projects, getProjects } = useGetProjects();
+  const { loading: postLoading, postProject } = usePostProject();
+  const { loading: deleteLoading, deleteProject } = useDeleteProject();
+  const { authUser } = useAuthContext();
+
+  // Form state for adding new projects
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [github, setGithub] = useState("");
-  const { authUser } = useAuthContext();
 
+  // Handle image conversion
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     const base64Image = await convertToBase64(file);
     setImage(base64Image);
   };
 
+  // Handle form submission (add new project)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await postProject({ title, description, image, github }, async () => {
-      setTitle("");
-      setDescription("");
-      setImage(null);
-      setGithub("");
+    const projectData = { title, description, image, github };
+
+    await postProject(projectData, async () => {
+      resetForm();
       document.getElementById("project_modal").close();
       toast.success("Project added successfully!");
       await getProjects();
     });
   };
 
+  // Reset form
+  const resetForm = () => {
+    setTitle("");
+    setDescription("");
+    setImage(null);
+    setGithub("");
+  };
+
+  // Handle project deletion
+  const handleDelete = async (projecttitle) => {
+    await deleteProject(projecttitle, async () => {
+      toast.success("Project deleted successfully!");
+      await getProjects();
+    });
+  };
+
+  // JSX Render
   return (
     <div className="w-full mt-32 flex justify-center flex-col items-center py-32 md:py-48 lg:py-64">
       {authUser && (
@@ -47,12 +70,8 @@ const ProjectSection = () => {
       )}
 
       {/* Project Submission Modal */}
-      <dialog
-        id="project_modal"
-        className="modal modal-bottom sm:modal-middle">
-        <form
-          onSubmit={handleSubmit}
-          className="modal-box space-y-4 bg-yellow-500">
+      <dialog id="project_modal" className="modal modal-bottom sm:modal-middle">
+        <form onSubmit={handleSubmit} className="modal-box space-y-4 bg-yellow-500">
           <button
             type="button"
             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
@@ -110,10 +129,7 @@ const ProjectSection = () => {
               className="flex justify-center">
               <div className="card bg-yellow-500 w-full shadow-xl transform transition-transform duration-300 hover:scale-105">
                 <figure>
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                  />
+                  <img src={project.image} alt={project.title} />
                 </figure>
                 <div className="card-body">
                   <h2 className="card-title text-black">{project.title}</h2>
@@ -126,6 +142,11 @@ const ProjectSection = () => {
                       className="btn btn-primary bg-white border-none hover:bg-yellow-300">
                       Github
                     </a>
+                    <button
+                      className="btn btn-primary bg-red-500 border-none hover:bg-red-300"
+                      onClick={() => handleDelete(project.title)}>
+                      Delete
+                    </button>
                   </div>
                 </div>
               </div>
