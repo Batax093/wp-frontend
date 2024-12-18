@@ -4,21 +4,24 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Poppins";
-  background: #dee1da;
+  background: #fff;
 }
 
 header {
-  font-weight: bold;
+  font-weight: semibold;
 }
 
 footer {
-  background: #eab308;
+  background: #fff;
 }
 
 .btn {
-  color: #fff;
   text-size-adjust: 100%;
   font-size: large;
 }
@@ -44,20 +47,14 @@ footer {
   background: grey;
 }
 
-.btn {
-  color: #121212;
-}
-
 .custom-button {
   display: inline-block;
   position: relative;
   padding: 1.5rem 3rem;
   font-size: 1.25rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: white;
-  background-color: #eab308;
-  border-radius: 30px;
+  font-weight: normal;
+  color: #fdb833;
+  background-color: white;
   overflow: hidden;
   text-decoration: none;
   box-shadow: 0 0 0 rgba(255, 126, 95, 0.7);
@@ -69,8 +66,8 @@ footer {
 }
 
 .custom-button:hover {
-  color: black;
-  background-color: #fef9c3;
+  color: #fdb833;
+  background-color: white;
 }
 
 .intro {

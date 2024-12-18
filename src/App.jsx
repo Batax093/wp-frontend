@@ -16,7 +16,7 @@ function App() {
     <>
       <Toaster />
       <ParallaxProvider>
-        <div className="h-full flex items-center justify-center">
+        <div className="h-full w-[100%] flex items-center justify-center">
           <Routes>
             <Route
               path="/"

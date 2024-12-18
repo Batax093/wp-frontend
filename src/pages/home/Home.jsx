@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div className="flex flex-col items-center w-screen min-w-screen overflow-x-hidden">
       <Header />
-      <main className="w-full">
+      <main className="flex flex-col w-full">
         <LandingPage />
         <ProjectSection />
         <SkillsSection />

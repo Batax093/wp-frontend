@@ -1,14 +1,16 @@
 import { Parallax } from "react-scroll-parallax";
-import usePostSkill from "../hooks/usePostSkill";
 import { useState } from "react";
-import convertToBase64 from "../utils/convert64base";
-import toast from "react-hot-toast";
-import useGetSkills from "../hooks/useGetSkills";
 import { useAuthContext } from "../context/AuthContext";
+import toast from "react-hot-toast";
+import convertToBase64 from "../utils/convert64base";
+import usePostSkill from "../hooks/usePostSkill";
+import useGetSkills from "../hooks/useGetSkills";
+import useDeleteSkills from "../hooks/useDeleteSkills";
 
 const SkillsSection = () => {
   const { loading: postLoading, postSkill } = usePostSkill();
   const { loading: getLoading, skills, getSkills } = useGetSkills();
+  const { loading: deleteLoading, deleteSkill } = useDeleteSkills();
   const [name, setName] = useState("");
   const [icon, setIcon] = useState(null);
   const { authUser } = useAuthContext();
@@ -19,19 +21,33 @@ const SkillsSection = () => {
     setIcon(base64Icon);
   };
 
+  const resetForm = () => {
+    setName("");
+    setIcon(null);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await postSkill({ name, icon }, async () => {
-      setName("");
-      setIcon(null);
+
+    const skillData = { name, icon };
+    await postSkill(skillData, async () => {
+      resetForm();
       document.getElementById("skill_modal").close();
       toast.success("Skill added successfully!");
       await getSkills();
     });
   };
 
+  const handleDelete = async (skillname) => {
+    await deleteSkill(skillname, async () => {
+      toast.success("Skill deleted successfully!");
+      await getSkills();
+    });
+  };
+
   return (
-    <div className="w-full mt-72 flex justify-center items-center my-96 py-96">
+    <div
+      id="skills"
+      className="h-screen w-full flex justify-center items-center py-16 md:py-32 lg:py-48">
       <div className="w-full max-w-7xl flex flex-col items-center">
         {authUser && (
           <div className="w-full md:w-3/4 flex justify-center items-center p-10">
@@ -47,7 +63,7 @@ const SkillsSection = () => {
 
         <dialog
           id="skill_modal"
-          className="modal modal-bottom sm:modal-middle">
+          className="modal modal-bottom sm:modal-middle text-black">
           <form
             onSubmit={handleSubmit}
             className="modal-box space-y-4 bg-yellow-500">
@@ -80,9 +96,19 @@ const SkillsSection = () => {
           </form>
         </dialog>
 
-        <div className="flex flex-col md:flex-row justify-around mt-20 space-y-10 md:space-y-0 md:space-x-10">
+        <div className="flex flex-col md:flex-row justify-around mt-20 space-y-10 md:space-y-0 md:space-x-10 sm:justify-center sm:items-center">
+          <Parallax
+            translateY={[-25, 10]}
+            speed={25}
+            opacity={[-2, 4]}
+            easing="easeOutQuad">
+            <div className="flex items-center justify-center">
+              <p className="text-black text-xl md:text-2xl xl:text-3xl sm:text-center">And Through it all, I have learned a lot of things.</p>
+            </div>
+          </Parallax>
+
           {getLoading ? (
-            <div className="flex items-center justify-center loading loading-spinner loading-lg text-center">Loading Projects...</div>
+            <div className="flex items-center justify-center loading loading-spinner loading-xl text-center">Loading Projects...</div>
           ) : (
             skills.map((skill, index) => (
               <Parallax
@@ -91,8 +117,8 @@ const SkillsSection = () => {
                 scale={[0.75, 1]}
                 easing="easeOutQuad"
                 opacity={[-2, 4]}
-                className="parallax-element">
-                <div className="pt-10 card bg-yellow-500 w-72 md:w-96 shadow-xl flex items-center justify-center transform transition-transform duration-300 hover:scale-105">
+                className="parallax-element flex flex-col md:flex-row justify-around mt-20 space-y-10 md:space-y-0 md:space-x-10 items-center">
+                <div className="pt-10 card bg-white w-72 md:w-96 shadow-xl flex items-center justify-center transform transition-transform duration-300 hover:scale-105">
                   <figure>
                     <img
                       src={skill.icon}
@@ -101,7 +127,17 @@ const SkillsSection = () => {
                   </figure>
                   <div className="flex justify-around">
                     <div className="card-body">
-                      <h2 className="card-title text-black text-center">{skill.name}</h2>
+                      <h2 className="card-title text-black justify-center">{skill.name}</h2>
+                      {authUser && (
+                        <div className="card-actions justify-center">
+                          <button
+                            className="btn btn-primary border-none bg-yellow-500 hover:bg-red-500"
+                            disabled={deleteLoading}
+                            onClick={() => handleDelete(skill.name)}>
+                            {deleteLoading ? <span className="loading loading-spinner loading-lg"></span> : "Delete Skill"}
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

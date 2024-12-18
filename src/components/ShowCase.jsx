@@ -41,25 +41,26 @@ const ShowCase = () => {
         <Parallax
           translateX={["0vw", "0vw"]}
           translateY={["0vh", "0vh"]}
-          opacity={[-2, 4]}
+          opacity={[-2, 7]}
           className="flex flex-col justify-center items-center w-full lg:w-1/2 space-y-6 lg:space-y-12">
           <div className="intro text-center text-md md:text-xl lg:text-2xl text-black leading-relaxed space-y-4 px-4 lg:px-0 z-0">
-            <p>Horas! I am an ambitious and high-energy informatics student,</p>
-            <p>with a passion for developing myself and establishing good and competent relationships.</p>
-            <p>I started learning web development in August 2023,</p>
-            <p>so I still have a long way to go.</p>
-            <p>I am also looking for an internship to accelerate my advancement in software development.</p>
+            <p className="text-xl md:text-2xl lg:text-3xl text-center md:text-start xl:text-justify font-normal">
+              Hi, I’m Fredrik, a student who’s passionate about both backend and frontend development. I love exploring the full stack and building
+              seamless, user-friendly applications. This website is my portfolio – a place where you can discover my projects, learn about my journey,
+              and connect with me.
+            </p>
           </div>
           <div className="flex justify-center">
-            <button
-              className="custom-button mt-2 bg-yellow-500 text-white py-4 px-8 shadow-lg hover:bg-yellow-300 transition duration-300"
+            <a
+              href=""
+              className="mt-2 text-black py-4 px-8 text-lg hover:shadow-2xl transition-shadow duration-300 rounded-full"
               onClick={() => document.getElementById("contact_modal").showModal()}>
               {`Let's Connect`}
-            </button>
+            </a>
           </div>
         </Parallax>
       </div>
-
+      
       {/* Modal content */}
       <dialog
         id="contact_modal"
@@ -101,7 +102,7 @@ const ShowCase = () => {
                 <button
                   disabled={loading}
                   type="submit"
-                  className="submit-btn justify-center self-center px-10 py-4 mt-7 bg-yellow-300 rounded-3xl text-black whitespace-nowrap hover:bg-gray-300 max-md:px-5 hover:text-black">
+                  className="submit-btn justify-center self-center px-10 py-4 mt-7 bg-white rounded-3xl text-black whitespace-nowrap hover:bg-gray-300 max-md:px-5 hover:text-black">
                   {loading ? <span className="loading loading-spinner loading-xl"></span> : "Submit"}
                 </button>
               </div>

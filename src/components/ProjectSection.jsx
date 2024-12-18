@@ -7,8 +7,7 @@ import { Parallax } from "react-scroll-parallax";
 import convertToBase64 from "../utils/convert64base";
 import { useAuthContext } from "../context/AuthContext";
 
-const ProjectSection = () => {  
-  // Fetch and manage project data
+const ProjectSection = () => {
   const { loading: getLoading, projects, getProjects } = useGetProjects();
   const { loading: postLoading, postProject } = usePostProject();
   const { loading: deleteLoading, deleteProject } = useDeleteProject();
@@ -20,14 +19,12 @@ const ProjectSection = () => {
   const [image, setImage] = useState(null);
   const [github, setGithub] = useState("");
 
-  // Handle image conversion
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     const base64Image = await convertToBase64(file);
     setImage(base64Image);
   };
 
-  // Handle form submission (add new project)
   const handleSubmit = async (e) => {
     e.preventDefault();
     const projectData = { title, description, image, github };
@@ -40,7 +37,6 @@ const ProjectSection = () => {
     });
   };
 
-  // Reset form
   const resetForm = () => {
     setTitle("");
     setDescription("");
@@ -48,8 +44,8 @@ const ProjectSection = () => {
     setGithub("");
   };
 
-  // Handle project deletion
   const handleDelete = async (projecttitle) => {
+    console.log(projecttitle);
     await deleteProject(projecttitle, async () => {
       toast.success("Project deleted successfully!");
       await getProjects();
@@ -58,20 +54,16 @@ const ProjectSection = () => {
 
   // JSX Render
   return (
-    <div className="w-full mt-32 flex justify-center flex-col items-center py-32 md:py-48 lg:py-64">
-      {authUser && (
-        <div className="w-full md:w-3/4 flex justify-center items-center p-10">
-          <button
-            className="btn btn-primary bg-yellow-500 hover:bg-yellow-300 rounded-xl border-none"
-            onClick={() => document.getElementById("project_modal").showModal()}>
-            Add Project
-          </button>
-        </div>
-      )}
-
+    <div
+      id="projects"
+      className="w-full h-screen flex justify-center items-center py-16 md:py-32 lg:py-48">
       {/* Project Submission Modal */}
-      <dialog id="project_modal" className="modal modal-bottom sm:modal-middle">
-        <form onSubmit={handleSubmit} className="modal-box space-y-4 bg-yellow-500">
+      <dialog
+        id="project_modal"
+        className="modal modal-bottom sm:modal-middle text-black">
+        <form
+          onSubmit={handleSubmit}
+          className="modal-box space-y-4 bg-yellow-500">
           <button
             type="button"
             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
@@ -115,42 +107,67 @@ const ProjectSection = () => {
       </dialog>
 
       {/* Displaying Projects */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-20 w-3/4">
+      <div className="flex flex-col md:grid md:grid-cols-2 xl:flex-row justify-around mt-20 space-y-10 md:space-y-0 md:space-x-10 sm:justify-center sm:items-center">
+        <Parallax
+          translateY={[-25, 10]}
+          speed={25}
+          opacity={[-2, 4]}
+          easing="easeOutQuad">
+          <div className="flex items-center justify-center">
+            {authUser && (
+              <div className="flex justify-center items-center p-10 sm:p-2 md:p-8">
+                <button
+                  className="font-normal text-black text-xl hover:text-customYellow transition-colors duration-300"
+                  onClick={() => document.getElementById("project_modal").showModal()}>
+                  Add Project
+                </button>
+              </div>
+            )}
+            <p className="text-black text-xl md:text-2xl xl:text-3xl sm:text-center">I learn how to code by doing some Projects</p>
+          </div>
+        </Parallax>
         {getLoading ? (
-          <div className="flex items-center justify-center loading loading-spinner loading-lg text-center">Loading Projects...</div>
+          <div className="flex items-center justify-center loading loading-spinner loading-xl text-center">Loading Projects...</div>
         ) : (
           projects.map((project, index) => (
             <Parallax
               key={index}
-              speed={index % 2 === 0 ? -1 : 1}
+              speed={25}
               opacity={[-2, 4]}
               easing="easeOutQuad"
               scale={[0.75, 1]}
-              className="flex justify-center">
-              <div className="card bg-yellow-500 w-full shadow-xl transform transition-transform duration-300 hover:scale-105">
-                <figure>
-                  <img src={project.image} alt={project.title} />
-                </figure>
-                <div className="card-body">
-                  <h2 className="card-title text-black">{project.title}</h2>
-                  <p className="text-black">{project.description}</p>
-                  <div className="card-actions justify-end">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-primary bg-white border-none hover:bg-yellow-300">
-                      Github
-                    </a>
-                    {authUser && (
-                      <button
-                        className="btn btn-primary bg-white border-none hover:bg-yellow-300"
-                        onClick={() => handleDelete(project.title)}>
-                        Delete
-                      </button>
-                    )}
+              className="parallax-element flex flex-col md:flex-row justify-around mt-20 space-y-10 md:space-y-0 md:space-x-10 items-center">
+              <div className="card bg-white w-72 md:w-96 shadow-xl flex items-center justify-center transform transition-transform box duration-300 hover:scale-105">
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  <figure className="overflow-hidden">
+                    <img
+                      className="w-full h-full object-fill"
+                      src={project.image}
+                      alt={project.title}
+                    />
+                  </figure>
+                  <div className="flex justify-around">
+                    <div className="card-body">
+                      <h2 className="card-title text-black">{project.title}</h2>
+                      <p className="text-black">{project.description}</p>
+                      <div className="card-actions justify-around">
+                        {authUser && (
+                          <div className="card-actions justify-center">
+                            <button
+                              className="btn btn-primary bg-yellow-500 border-none hover:bg-red-500"
+                              disabled={deleteLoading}
+                              onClick={() => handleDelete(project.title)}>
+                              {deleteLoading ? <span className="loading loading-spinner loading-lg"></span> : "Delete Project"}
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </a>
               </div>
             </Parallax>
           ))

@@ -9,7 +9,7 @@ const useDeleteSkills = () => {
         setLoading(true);
         try {
             const normalizedSlug = encodeURIComponent(slugify(slug));
-            const res = await fetch(`https://wp-backend-ashy.vercel.app/api/skill/${normalizedSlug}`, {
+            const res = await fetch(`https://localhost:5000/api/skills/delete-skill/${normalizedSlug}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

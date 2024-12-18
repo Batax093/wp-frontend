@@ -1,6 +1,13 @@
 const Footer = () => {
   return (
-    <div className="w-full mt-32">
+    <div className="w-full mt-16">
+      <div className="flex justify-center">
+        <a
+          className="text-customYellow text-lg hover:text-black transition-colors duration-300"
+          href="#header">
+          Scroll Up
+        </a>
+      </div>
       <footer className="rounded-lg w-full footer footer-center text-primary-content py-10">
         <aside>
           <p>Copyright © {new Date().getFullYear()} - Fredrik Sahalatua Pakpahan</p>

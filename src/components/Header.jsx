@@ -1,29 +1,27 @@
 import { useAuthContext } from "../context/AuthContext";
-import { CgLogOut } from "react-icons/cg";
-import useLogout from "../hooks/useLogout";
 import toast from "react-hot-toast";
 
 const Header = () => {
-  const { authUser } = useAuthContext();
-  const { logout, loading } = useLogout();
+  const { authUser, logout } = useAuthContext();
 
   const handleLogout = async () => {
-    await logout();
+    logout();
     toast.success("You have successfully logged out");
   };
 
   return (
-    <header className="flex items-center justify-between w-3/4 mt-10">
-      <div className="flex items-center justify-center text-yellow-500">
-        <h1 className="text-3xl">Fredrik Sahalatua Pakpahan</h1>
+    <header id="header" className="flex w-full justify-between mt-10 flex-row gap-5 text-xl">
+      <div className="ml-10">
+        <a className="text-customYellow hover:text-black transition-colors duration-300 cursor-pointer">Fredrik</a>
+      </div>
+      <div className="mr-10">
+        <a className="hover:text-customYellow text-black transition-colors duration-300 cursor-pointer">Pakpahan</a>
       </div>
       {authUser && (
         <button
           onClick={handleLogout}
-          disabled={loading}
-          className="flex items-center text-white bg-yellow-500 p-2 rounded-md hover:bg-yellow-600"
-        >
-          <CgLogOut className="mr-2" />
+          disabled={!authUser}
+          className="flex items-center text-black hover:text-customYellow transition-colors duration-300 mr-10">
           Logout
         </button>
       )}

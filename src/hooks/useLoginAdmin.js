@@ -4,14 +4,14 @@ import toast from "react-hot-toast";
 
 const useLoginAdmin = () => {
   const [loading, setLoading] = useState(false);
-  const { setAuthUser } = useAuthContext();
+  const { login } = useAuthContext();
 
   const loginAdmin = async (email, password) => {
     const success = handleInputErrors(email, password);
     if (!success) return;
     setLoading(true);
     try {
-      const res = await fetch("https://wp-backend-ashy.vercel.app/api/admin-api/login", {
+      const res = await fetch("http://localhost:5000/api/admin/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -22,9 +22,8 @@ const useLoginAdmin = () => {
       if (data.errorr) {
         throw new Error(data.errorr);
       }
+      login(data.data.token);
       toast.success("Login successful");
-      localStorage.setItem("AdminUser", JSON.stringify(data));
-      setAuthUser(data);
       return true;
     } catch (error) {
       toast.error(error.message);
