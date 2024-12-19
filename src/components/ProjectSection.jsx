@@ -1,8 +1,8 @@
 import { useState } from "react";
 import useGetProjects from "../hooks/useGetProject";
 import usePostProject from "../hooks/usePostProject";
-import useDeleteProject from "../hooks/useDeleteProject";
 import toast from "react-hot-toast";
+import useDeleteProject from "../hooks/useDeleteProject";
 import { Parallax } from "react-scroll-parallax";
 import convertToBase64 from "../utils/convert64base";
 import { useAuthContext } from "../context/AuthContext";
@@ -28,13 +28,12 @@ const ProjectSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const projectData = { title, description, image, github };
-
     await postProject(projectData, async () => {
       resetForm();
       document.getElementById("project_modal").close();
       toast.success("Project added successfully!");
-      await getProjects();
     });
+    await getProjects();
   };
 
   const resetForm = () => {
@@ -45,7 +44,6 @@ const ProjectSection = () => {
   };
 
   const handleDelete = async (projecttitle) => {
-    console.log(projecttitle);
     await deleteProject(projecttitle, async () => {
       toast.success("Project deleted successfully!");
       await getProjects();
@@ -63,7 +61,7 @@ const ProjectSection = () => {
         className="modal modal-bottom sm:modal-middle text-black">
         <form
           onSubmit={handleSubmit}
-          className="modal-box space-y-4 bg-yellow-500">
+          className="modal-box space-y-4 bg-white">
           <button
             type="button"
             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
@@ -138,36 +136,32 @@ const ProjectSection = () => {
               scale={[0.75, 1]}
               className="parallax-element flex flex-col md:flex-row justify-around mt-20 space-y-10 md:space-y-0 md:space-x-10 items-center">
               <div className="card bg-white w-72 md:w-96 shadow-xl flex items-center justify-center transform transition-transform box duration-300 hover:scale-105">
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  <figure className="overflow-hidden">
-                    <img
-                      className="w-full h-full object-fill"
-                      src={project.image}
-                      alt={project.title}
-                    />
-                  </figure>
-                  <div className="flex justify-around">
-                    <div className="card-body">
-                      <h2 className="card-title text-black">{project.title}</h2>
-                      <p className="text-black">{project.description}</p>
-                      <div className="card-actions justify-around">
-                        {authUser && (
-                          <div className="card-actions justify-center">
-                            <button
-                              className="btn btn-primary bg-yellow-500 border-none hover:bg-red-500"
-                              disabled={deleteLoading}
-                              onClick={() => handleDelete(project.title)}>
-                              {deleteLoading ? <span className="loading loading-spinner loading-lg"></span> : "Delete Project"}
-                            </button>
-                          </div>
-                        )}
-                      </div>
+                <figure className="overflow-hidden">
+                  <img
+                    className="w-full h-full object-fill"
+                    src={project.image}
+                    alt={project.title}
+                  />
+                </figure>
+                <div className="flex justify-around">
+                  <div className="card-body">
+                    <h2 className="card-title text-black">{project.title}</h2>
+                    <p className="text-black">{project.description}</p>
+                    <div className="card-actions justify-around">
+                      <button className="btn btn-primary bg-white border-none hover:bg-customYellow hover:shadow-md">Github</button>
+                      {authUser && (
+                        <div className="card-actions justify-center">
+                          <button
+                            className="btn btn-primary bg-white border-none hover:bg-red-500 hover:shadow-md"
+                            disabled={deleteLoading}
+                            onClick={() => handleDelete(project.title)}>
+                            {deleteLoading ? <span className="loading loading-spinner loading-lg"></span> : "Delete"}
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
-                </a>
+                </div>
               </div>
             </Parallax>
           ))

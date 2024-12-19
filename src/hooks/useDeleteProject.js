@@ -1,11 +1,13 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import slugify from "../utils/slugify";
+import { useAuthContext } from "../context/AuthContext";
 
 const useDeleteProject = () => {
     const [loading, setLoading] = useState(false);
+    const { token } = useAuthContext();
 
-    const deleteProject = async (slug) => {
+    const deleteProject = async (slug, callback) => {
         setLoading(true);
         try {
             const normalizedSlug = encodeURIComponent(slugify(slug));
@@ -14,6 +16,7 @@ const useDeleteProject = () => {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
                 },
             });
             if (!res.ok) {
@@ -28,6 +31,9 @@ const useDeleteProject = () => {
 
             toast.success("Project deleted successfully!");
             await new Promise((resolve) => setTimeout(resolve, 2000));
+            if (callback) {
+                callback();
+            }
         } catch (error) {
             throw new Error(error.message || "Something went wrong!");
         } finally {

@@ -1,16 +1,19 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useAuthContext } from "../context/AuthContext";
 
 const usePostProject = () => {
   const [loading, setLoading] = useState(false);
+  const { token } = useAuthContext()
 
-  const postProject = async ({ title, description, image, github }, resetForm) => {
+  const postProject = async ({ title, description, image, github }, resetForm, callback) => {
     setLoading(true);
     try {
-      const res = await fetch("https://wp-backend-ashy.vercel.app/api/projects/", {
+      const res = await fetch("http://localhost:5000/api/projects/add-project", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ title, description, image, github }),
       });
@@ -24,6 +27,7 @@ const usePostProject = () => {
 
       toast.success("Project added successfully!");
       await new Promise((resolve) => setTimeout(resolve, 2000));
+      if (callback) {callback}
     } catch (error) {
       toast.error(error.message || "Something went wrong!");
     } finally {

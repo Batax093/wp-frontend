@@ -1,18 +1,21 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useAuthContext } from "../context/AuthContext";
 
 const usePostSkill = () => {
   const [loading, setLoading] = useState(false);
+  const { token } = useAuthContext();
 
-  const postSkill = async ({ name, icon }, resetForm) => {
+  const postSkill = async ({ name, icon, description }, resetForm, callback) => {
     setLoading(true);
     try {
-      const res = await fetch("https://wp-backend-ashy.vercel.app/api/skill/add-skill", {
+      const res = await fetch("http://localhost:5000/api/skills/add-skill", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ name, icon }),
+        body: JSON.stringify({ name, icon, description }),
       });
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
@@ -23,6 +26,7 @@ const usePostSkill = () => {
       }
       toast.success("Skill added successfully!");
       await new Promise((resolve) => setTimeout(resolve, 2000));
+      if (callback) {callback}
     } catch (error) {
       throw new Error(error.message || "Something went wrong!");
     } finally {

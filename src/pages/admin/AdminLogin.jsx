@@ -22,8 +22,8 @@ const AdminLogin = () => {
     <div className="flex justify-center items-center h-screen w-3/5">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md p-8 shadow-lg bg-yellow-500 rounded-lg space-y-6">
-        <h2 className="text-2xl font-bold text-center text-black">Admin Login</h2>
+        className="w-full max-w-md p-8 shadow-lg bg-customYellow rounded-lg space-y-6">
+        <h2 className="text-2xl font-normal text-center text-black">Admin Login</h2>
         <div>
           <label htmlFor="email" className="block text-black font-bold mb-2">
             Email
@@ -53,7 +53,7 @@ const AdminLogin = () => {
         <button
           type="submit"
           disabled={loading}
-          className="btn btn-primary w-full bg-white hover:bg-yellow-300 text-white rounded-md border-none">
+          className="btn btn-primary w-full bg-white hover:bg-yellow-300 text-black rounded-md border-none">
           {loading ? (
             <span className="loading loading-spinner loading-sm"></span>
           ) : (
