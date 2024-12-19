@@ -88,32 +88,13 @@ const SkillsSection = () => {
             type="submit"
             disabled={postLoading}
             className="btn btn-primary w-full bg-white border-none hover:bg-yellow-300">
-          {postLoading ? <span className="loading loading-spinner loading-lg"></span> : "Add Skill"}
+            {postLoading ? <span className="loading loading-spinner loading-lg"></span> : "Add Skill"}
           </button>
         </form>
       </dialog>
 
       {/* Display Skills */}
       <div className="flex flex-col md:grid md:grid-cols-2 xl:flex-row justify-around mt-20 space-y-10 md:space-y-0 md:space-x-10 sm:justify-center sm:items-center">
-        <Parallax
-          translateY={[-25, 10]}
-          speed={25}
-          opacity={[-2, 4]}
-          easing="easeOutQuad">
-          <div className="flex items-center justify-center">
-            {authUser && (
-              <div className="flex justify-center items-center p-10 sm:p-2 md:p-8">
-                <button
-                  className="font-normal text-black text-xl hover:text-customYellow transition-colors duration-300"
-                  onClick={() => document.getElementById("skill_modal").showModal()}>
-                  Add Skill
-                </button>
-              </div>
-            )}
-            <p className="text-black text-xl md:text-2xl xl:text-3xl sm:text-center">And Through it all, I have learned a lot of things.</p>
-          </div>
-        </Parallax>
-
         {getLoading ? (
           <div className="flex items-center justify-center loading loading-spinner loading-xl text-center">Loading Projects...</div>
         ) : (
@@ -151,6 +132,24 @@ const SkillsSection = () => {
             </Parallax>
           ))
         )}
+        <Parallax
+          translateY={[-25, 10]}
+          speed={25}
+          opacity={[-2, 4]}
+          easing="easeOutQuad">
+          <div className="flex items-center justify-center">
+            <p className="text-customYellow text-xl md:text-2xl xl:text-3xl sm:text-center">And Through it all, I have learned a lot of things.</p>
+            {authUser && (
+              <div className="flex justify-center items-center p-10 sm:p-2 md:p-8">
+                <button
+                  className="font-normal text-black text-xl hover:text-customYellow transition-colors duration-300"
+                  onClick={() => document.getElementById("skill_modal").showModal()}>
+                  Add Skill
+                </button>
+              </div>
+            )}
+          </div>
+        </Parallax>
       </div>
     </div>
   );

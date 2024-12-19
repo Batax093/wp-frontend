@@ -4,6 +4,7 @@ import ProjectSection from "../../components/ProjectSection";
 import SkillsSection from "../../components/SkillsSection";
 import Footer from "../../components/Footer";
 import ShowCase from "../../components/ShowCase";
+import Journey from "../../components/Journey";
 
 const Home = () => {
   
@@ -12,6 +13,7 @@ const Home = () => {
       <Header />
       <main className="flex flex-col w-full">
         <LandingPage />
+        <Journey />
         <ProjectSection />
         <SkillsSection />
         <ShowCase />
