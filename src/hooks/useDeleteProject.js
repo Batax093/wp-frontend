@@ -35,7 +35,7 @@ const useDeleteProject = () => {
         callback();
       }
     } catch (error) {
-        console.log(error)
+        toast.error(error.message || "Something went wrong!");
       throw new Error(error.message || "Something went wrong!");
     } finally {
       setLoading(false);

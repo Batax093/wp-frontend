@@ -28,9 +28,7 @@ const useLoginAdmin = () => {
       toast.success("Login successful");
       return true;
     } catch (error) {
-      console.log(error)
-      toast.error(error.message);
-      return false;
+      throw new Error(error.message || "Something went wrong!");
     } finally {
       setLoading(false);
     }

@@ -6,7 +6,7 @@ import { useAuthContext } from "../context/AuthContext";
 const useDeleteSkills = () => {
   const [loading, setLoading] = useState(false);
   const { token } = useAuthContext();
-  const API_URL = import.meta.env.VITE_API_URL
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const deleteSkill = async (slug, callback) => {
     setLoading(true);
@@ -18,7 +18,9 @@ const useDeleteSkills = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-      }).then((res) => res.json()).then((data) => console.log(data));
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
@@ -35,7 +37,7 @@ const useDeleteSkills = () => {
         callback();
       }
     } catch (error) {
-        console.log(error)
+      toast.error(error.message || "Something went wrong!");
       throw new Error(error.message || "Something went wrong!");
     } finally {
       setLoading(false);
