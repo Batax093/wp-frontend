@@ -12,7 +12,7 @@ const useDeleteSkills = () => {
     setLoading(true);
     try {
       const normalizedSlug = encodeURIComponent(slugify(slug));
-      const res = await fetch(`${API_URL}/api/skills/delete-skill/${normalizedSlug}`, {
+      const res = await fetch(`${API_URL}api/skills/delete-skill/${normalizedSlug}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

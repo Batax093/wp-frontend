@@ -13,7 +13,7 @@ const useDeleteProject = () => {
     try {
       const normalizedSlug = encodeURIComponent(slugify(slug));
       console.log("asd, ", normalizedSlug);
-      const res = await fetch(`${API_URL}/api/projects/delete-project/${normalizedSlug}`, {
+      const res = await fetch(`${API_URL}api/projects/delete-project/${normalizedSlug}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

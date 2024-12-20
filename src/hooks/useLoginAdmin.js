@@ -12,7 +12,7 @@ const useLoginAdmin = () => {
     if (!success) return;
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/api/admin/login`, {
+      const res = await fetch(`${API_URL}api/admin/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

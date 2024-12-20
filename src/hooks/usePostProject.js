@@ -10,7 +10,7 @@ const usePostProject = () => {
   const postProject = async ({ title, description, image, github }, resetForm, callback) => {
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/api/projects/add-project`, {
+      const res = await fetch(`${API_URL}api/projects/add-project`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

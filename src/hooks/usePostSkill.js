@@ -10,7 +10,7 @@ const usePostSkill = () => {
   const postSkill = async ({ name, icon, description }, resetForm, callback) => {
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/api/skills/add-skill`, {
+      const res = await fetch(`${API_URL}api/skills/add-skill`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

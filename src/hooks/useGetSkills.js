@@ -9,7 +9,7 @@ const useGetSkills = () => {
   const getSkills = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/api/skills`, {
+      const res = await fetch(`${API_URL}api/skills`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

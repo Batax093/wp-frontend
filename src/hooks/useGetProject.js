@@ -9,7 +9,7 @@ const useGetProjects = () => {
   const getProjects = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/api/projects`, {
+      const res = await fetch(`${API_URL}api/projects`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
