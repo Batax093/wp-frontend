@@ -25,6 +25,7 @@ const useGetSkills = () => {
       setSkills(data);
       await new Promise((resolve) => setTimeout(resolve, 2000));
     } catch (error) {
+      console.log(error);
       toast.error(error.message);
     } finally {
       setLoading(false);

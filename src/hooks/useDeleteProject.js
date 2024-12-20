@@ -12,7 +12,6 @@ const useDeleteProject = () => {
     setLoading(true);
     try {
       const normalizedSlug = encodeURIComponent(slugify(slug));
-      console.log("asd, ", normalizedSlug);
       const res = await fetch(`${API_URL}api/projects/delete-project/${normalizedSlug}`, {
         method: "DELETE",
         headers: {
@@ -36,6 +35,7 @@ const useDeleteProject = () => {
         callback();
       }
     } catch (error) {
+        console.log(error)
       throw new Error(error.message || "Something went wrong!");
     } finally {
       setLoading(false);

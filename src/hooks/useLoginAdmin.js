@@ -18,15 +18,17 @@ const useLoginAdmin = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-      }).then((res) => res.json()).then((data) => console.log(data));
+      })
       const data = await res.json();
+      console.log('asd', data.token)
       if (data.errorr) {
         throw new Error(data.errorr);
       }
-      login(data.data.token);
+      login(data.token);
       toast.success("Login successful");
       return true;
     } catch (error) {
+      console.log(error)
       toast.error(error.message);
       return false;
     } finally {

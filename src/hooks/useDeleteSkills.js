@@ -35,6 +35,7 @@ const useDeleteSkills = () => {
         callback();
       }
     } catch (error) {
+        console.log(error)
       throw new Error(error.message || "Something went wrong!");
     } finally {
       setLoading(false);

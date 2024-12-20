@@ -14,7 +14,7 @@ const useGetProjects = () => {
         headers: {
           "Content-Type": "application/json",
         },
-      }).then((res) => res.json()).then((data) => console.log(data));
+      })
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
@@ -25,6 +25,7 @@ const useGetProjects = () => {
       setProjects(data);
       await new Promise((resolve) => setTimeout(resolve, 2000));
     } catch (error) {
+      console.log(error);
       toast.error(error.message);
     } finally {
       setLoading(false);

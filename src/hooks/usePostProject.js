@@ -30,6 +30,7 @@ const usePostProject = () => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       if (callback) {callback}
     } catch (error) {
+      console.log(error)
       toast.error(error.message || "Something went wrong!");
     } finally {
       setLoading(false);
