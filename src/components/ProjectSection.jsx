@@ -107,11 +107,10 @@ const ProjectSection = () => {
       {/* Displaying Projects */}
       <div className="flex flex-col md:grid md:grid-cols-2 xl:flex-row justify-around mt-20 space-y-10 md:space-y-0 md:space-x-10 sm:justify-center sm:items-center">
         <Parallax
-          translateY={[-25, 10]}
           speed={25}
           opacity={[-2, 4]}
           easing="easeOutQuad">
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center text-center">
             {authUser && (
               <div className="flex justify-center items-center p-10 sm:p-2 md:p-8">
                 <button
@@ -125,7 +124,9 @@ const ProjectSection = () => {
           </div>
         </Parallax>
         {getLoading ? (
-          <div className="flex items-center justify-center loading loading-spinner loading-xl text-center">Loading Projects...</div>
+          <div className="w-full items-center flex justify-center">
+            <div className="flex items-center justify-center loading loading-spinner loading-xl text-center">Loading Projects...</div>
+          </div>
         ) : (
           projects.map((project, index) => (
             <Parallax
@@ -148,11 +149,11 @@ const ProjectSection = () => {
                     <h2 className="card-title text-black">{project.title}</h2>
                     <p className="text-black">{project.description}</p>
                     <div className="card-actions justify-around">
-                      <button className="btn btn-primary bg-white border-none hover:bg-customYellow hover:shadow-md">Github</button>
+                      <button className="btn btn-primary bg-white border-none hover:bg-bluePastel hover:text-white hover:shadow-md">Github</button>
                       {authUser && (
                         <div className="card-actions justify-center">
                           <button
-                            className="btn btn-primary bg-white border-none hover:bg-red-500 hover:shadow-md"
+                            className="btn btn-primary bg-white border-none hover:bg-red-500 hover:shadow-md hover:text-white"
                             disabled={deleteLoading}
                             onClick={() => handleDelete(project.title)}>
                             {deleteLoading ? <span className="loading loading-spinner loading-lg"></span> : "Delete"}

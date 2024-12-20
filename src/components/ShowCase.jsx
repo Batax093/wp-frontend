@@ -27,7 +27,7 @@ const ShowCase = () => {
           className="flex flex-col justify-center items-center w-full lg:w-1/2 space-y-6 lg:space-y-12">
           <div className="intro text-center text-md md:text-xl lg:text-2xl text-black leading-relaxed space-y-4 px-4 lg:px-0 z-0">
             <p className="text-xl text-center md:text-2xl lg:text-3xl md:text-start xl:text-left font-normal">
-              Hi, I’m <span className="text-customYellow">Fredrik Sahalatua Pakpahan</span>, a student who’s passionate about both backend and frontend development. I love exploring the full stack and building
+              Hi, I’m <span className="text-bluePastel">Fredrik Sahalatua Pakpahan</span>, a student who’s passionate about both backend and frontend development. I love exploring the full stack and building
               seamless, user-friendly applications. This website is my portfolio – a place where you can discover my projects, learn about my journey,
               and connect with me.
             </p>

@@ -3,7 +3,7 @@ const Footer = () => {
     <div className="w-full mt-16">
       <div className="flex justify-center">
         <a
-          className="text-customYellow text-lg hover:text-black transition-colors duration-300"
+          className="text-bluePastel text-lg hover:text-black transition-colors duration-300"
           href="#header">
           Scroll Up
         </a>

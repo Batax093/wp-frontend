@@ -12,10 +12,10 @@ const Header = () => {
   return (
     <header id="header" className="flex w-full justify-between mt-10 flex-row gap-5 text-xl">
       <div className="ml-10">
-        <a className="text-customYellow hover:text-black transition-colors duration-300 cursor-pointer">Fredrik</a>
+        <a className="text-bluePastel transition-colors duration-300 cursor-pointer">Fredrik</a>
       </div>
       <div className="mr-10">
-        <a className="hover:text-customYellow text-black transition-colors duration-300 cursor-pointer">Pakpahan</a>
+        <a className="text-black transition-colors duration-300 cursor-pointer">Pakpahan</a>
       </div>
       {authUser && (
         <button

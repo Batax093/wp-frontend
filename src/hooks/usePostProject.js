@@ -4,12 +4,13 @@ import { useAuthContext } from "../context/AuthContext";
 
 const usePostProject = () => {
   const [loading, setLoading] = useState(false);
-  const { token } = useAuthContext()
+  const { token } = useAuthContext();
+  const API_URL = import.meta.env.VITE_API_URL
 
   const postProject = async ({ title, description, image, github }, resetForm, callback) => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/projects/add-project", {
+      const res = await fetch(`${API_URL}/api/projects/add-project`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

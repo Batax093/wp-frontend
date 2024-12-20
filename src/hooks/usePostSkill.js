@@ -5,11 +5,12 @@ import { useAuthContext } from "../context/AuthContext";
 const usePostSkill = () => {
   const [loading, setLoading] = useState(false);
   const { token } = useAuthContext();
+  const API_URL = import.meta.env.VITE_API_URL
 
   const postSkill = async ({ name, icon, description }, resetForm, callback) => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/skills/add-skill", {
+      const res = await fetch(`${API_URL}/api/skills/add-skill`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

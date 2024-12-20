@@ -4,11 +4,12 @@ import toast from "react-hot-toast";
 const useGetSkills = () => {
   const [loading, setLoading] = useState(false);
   const [skills, setSkills] = useState([]);
+  const API_URL = import.meta.env.VITE_API_URL
 
   const getSkills = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/skills/", {
+      const res = await fetch(`${API_URL}/api/skills`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

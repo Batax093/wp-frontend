@@ -22,7 +22,7 @@ const AdminLogin = () => {
     <div className="flex justify-center items-center h-screen w-3/5">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md p-8 shadow-lg bg-customYellow rounded-lg space-y-6">
+        className="w-full max-w-md p-8 shadow-lg bg-bluePastel rounded-lg space-y-6">
         <h2 className="text-2xl font-normal text-center text-black">Admin Login</h2>
         <div>
           <label htmlFor="email" className="block text-black font-bold mb-2">

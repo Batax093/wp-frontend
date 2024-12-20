@@ -4,11 +4,12 @@ import toast from "react-hot-toast";
 const useGetProjects = () => {
   const [loading, setLoading] = useState(false);
   const [projects, setProjects] = useState([]);
+  const API_URL = import.meta.env.VITE_API_URL
 
   const getProjects = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/projects/", {
+      const res = await fetch(`${API_URL}/api/projects`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
