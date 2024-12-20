@@ -3,7 +3,6 @@ import useGetProjects from "../hooks/useGetProject";
 import usePostProject from "../hooks/usePostProject";
 import toast from "react-hot-toast";
 import useDeleteProject from "../hooks/useDeleteProject";
-import { Parallax } from "react-scroll-parallax";
 import convertToBase64 from "../utils/convert64base";
 import { useAuthContext } from "../context/AuthContext";
 
@@ -50,11 +49,10 @@ const ProjectSection = () => {
     });
   };
 
-  // JSX Render
   return (
     <div
       id="projects"
-      className="w-full h-screen flex justify-center items-center py-16 md:py-32 lg:py-48">
+      className="w-full h-screen flex justify-center items-center py-16 sm:max-h-screen md:py-32 lg:py-48">
       {/* Project Submission Modal */}
       <dialog
         id="project_modal"
@@ -105,36 +103,29 @@ const ProjectSection = () => {
       </dialog>
 
       {/* Displaying Projects */}
-      <div className="flex flex-col md:grid md:grid-cols-2 xl:flex-row justify-around mt-20 space-y-10 md:space-y-0 md:space-x-10 sm:justify-center sm:items-center">
-        <Parallax
-          speed={25}
-          opacity={[-2, 4]}
-          easing="easeOutQuad">
-          <div className="flex items-center justify-center text-center">
-            {authUser && (
-              <div className="flex justify-center items-center p-10 sm:p-2 md:p-8">
-                <button
-                  className="font-normal text-black text-xl hover:text-customYellow transition-colors duration-300"
-                  onClick={() => document.getElementById("project_modal").showModal()}>
-                  Add Project
-                </button>
-              </div>
-            )}
-            <p className="text-black text-xl md:text-2xl xl:text-3xl sm:text-center">I learn how to code by doing some Projects</p>
-          </div>
-        </Parallax>
+      <div
+        id="test"
+        className="flex flex-col sm:grid sm:grid-cols-2 md:grid md:grid-cols-2 xl:flex-row justify-around mt-20 space-y-10 md:space-y-0 md:space-x-10 sm:justify-center sm:items-center max-h-screen">
+        <div className="flex items-center justify-center text-center">
+          {authUser && (
+            <div className="flex justify-center items-center p-10 sm:p-2 md:p-8">
+              <button
+                className="font-normal text-black text-xl hover:text-customYellow transition-colors duration-300"
+                onClick={() => document.getElementById("project_modal").showModal()}>
+                Add Project
+              </button>
+            </div>
+          )}
+          <p className="text-black text-xl md:text-2xl xl:text-3xl sm:text-center">I learn how to code by doing some Projects</p>
+        </div>
         {getLoading ? (
           <div className="w-full items-center flex justify-center">
             <div className="flex items-center justify-center loading loading-spinner loading-xl text-center">Loading Projects...</div>
           </div>
         ) : (
           projects.map((project, index) => (
-            <Parallax
+            <div
               key={index}
-              speed={25}
-              opacity={[-2, 4]}
-              easing="easeOutQuad"
-              scale={[0.75, 1]}
               className="parallax-element flex flex-col md:flex-row justify-around mt-20 space-y-10 md:space-y-0 md:space-x-10 items-center">
               <div className="card bg-white w-72 md:w-96 shadow-xl flex items-center justify-center transform transition-transform box duration-300 hover:scale-105">
                 <figure className="overflow-hidden">
@@ -149,7 +140,12 @@ const ProjectSection = () => {
                     <h2 className="card-title text-black">{project.title}</h2>
                     <p className="text-black">{project.description}</p>
                     <div className="card-actions justify-around">
-                      <a href={project.github} target="_blank" className="btn btn-primary bg-white border-none hover:bg-bluePastel hover:text-white hover:shadow-md">Github</a>
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        className="btn btn-primary bg-white border-none hover:bg-bluePastel hover:text-white hover:shadow-md">
+                        Github
+                      </a>
                       {authUser && (
                         <div className="card-actions justify-center">
                           <button
@@ -164,7 +160,7 @@ const ProjectSection = () => {
                   </div>
                 </div>
               </div>
-            </Parallax>
+            </div>
           ))
         )}
       </div>
