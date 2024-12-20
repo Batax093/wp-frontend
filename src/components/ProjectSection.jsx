@@ -149,7 +149,7 @@ const ProjectSection = () => {
                     <h2 className="card-title text-black">{project.title}</h2>
                     <p className="text-black">{project.description}</p>
                     <div className="card-actions justify-around">
-                      <button className="btn btn-primary bg-white border-none hover:bg-bluePastel hover:text-white hover:shadow-md">Github</button>
+                      <a href={project.github} className="btn btn-primary bg-white border-none hover:bg-bluePastel hover:text-white hover:shadow-md">Github</a>
                       {authUser && (
                         <div className="card-actions justify-center">
                           <button
