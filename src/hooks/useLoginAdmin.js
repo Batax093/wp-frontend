@@ -20,11 +20,11 @@ const useLoginAdmin = () => {
         body: JSON.stringify({ email, password }),
       })
       const data = await res.json();
-      console.log('asd', data.token)
+      console.log('asd', data)
       if (data.errorr) {
         throw new Error(data.errorr);
       }
-      login(data.token);
+      login(data.data.token);
       toast.success("Login successful");
       return true;
     } catch (error) {
