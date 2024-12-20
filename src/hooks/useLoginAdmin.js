@@ -20,7 +20,6 @@ const useLoginAdmin = () => {
         body: JSON.stringify({ email, password }),
       })
       const data = await res.json();
-      console.log('asd', data)
       if (data.errorr) {
         throw new Error(data.errorr);
       }

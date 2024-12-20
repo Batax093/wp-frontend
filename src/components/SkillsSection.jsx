@@ -13,7 +13,6 @@ const SkillsSection = () => {
   const { loading: deleteLoading, deleteSkill } = useDeleteSkills();
   const [name, setName] = useState("");
   const [icon, setIcon] = useState(null);
-  const [description, setDescription] = useState("");
   const { authUser } = useAuthContext();
 
   const handleIconChange = async (e) => {
@@ -25,12 +24,11 @@ const SkillsSection = () => {
   const resetForm = () => {
     setName("");
     setIcon(null);
-    setDescription("");
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const skillData = { name, icon, description };
+    const skillData = { name, icon };
     await postSkill(skillData, async () => {
       resetForm();
       document.getElementById("skill_modal").close();
@@ -76,13 +74,6 @@ const SkillsSection = () => {
             accept=".jpg, .jpeg, .png"
             onChange={handleIconChange}
             className="file-input file-input-bordered w-full bg-white"
-          />
-          <input
-            type="text"
-            placeholder="Skill Description"
-            className="input input-bordered w-full bg-white"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
           />
           <button
             type="submit"

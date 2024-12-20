@@ -22,7 +22,7 @@ const Journey = () => {
         <div className="w-full h-full flex items-center justify-center">
           <figure className="w-full h-full">
             <img
-              src="../../public/codingpixel.gif"
+              src="/codingpixel.gif"
               alt="lol"
               className="w-full h-full object-cover"
             />
@@ -51,7 +51,7 @@ const Journey = () => {
         <div className="w-full h-full flex items-center justify-center">
           <figure className="w-full h-full">
             <img
-              src="../../public/cuek.gif"
+              src="/cuek.gif"
               alt="lol"
               className="w-full h-full object-cover"
             />
