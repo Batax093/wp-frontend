@@ -1,6 +1,6 @@
 const Journey = () => {
   return (
-    <div className="w-full">
+    <div className="w-full border-t-2 border-black">
       <div className="h-screen w-full flex flex-col md:flex-row lg:flex-row items-center border-y-2 border-t-0 border-black justify-center">
         <div className="w-full h-full flex items-center justify-center lg:border-x-2 lg:border-black border-b-2 lg:border-b-0 border-black">
           <div className="flex flex-col gap-6 lg:gap-10 w-full lg:w-1/2">
