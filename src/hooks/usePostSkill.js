@@ -27,7 +27,7 @@ const usePostSkill = () => {
       }
       toast.success("Skill added successfully!");
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      if (callback) {callback}
+      if (callback) {callback()}
     } catch (error) {
       toast.error(error.message || "Something went wrong!");
       throw new Error(error.message || "Something went wrong!");
