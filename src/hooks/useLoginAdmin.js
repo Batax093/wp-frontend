@@ -18,7 +18,7 @@ const useLoginAdmin = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-      });
+      }).then((res) => res.json()).then((data) => console.log(data));
       const data = await res.json();
       if (data.errorr) {
         throw new Error(data.errorr);

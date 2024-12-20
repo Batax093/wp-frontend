@@ -17,7 +17,7 @@ const usePostSkill = () => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ name, icon, description }),
-      });
+      }).then((res) => res.json()).then((data) => console.log(data));
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
