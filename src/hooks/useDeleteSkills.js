@@ -19,8 +19,6 @@ const useDeleteSkills = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-        .then((res) => res.json())
-        .then((data) => console.log(data));
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }

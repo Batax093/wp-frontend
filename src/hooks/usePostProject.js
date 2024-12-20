@@ -17,7 +17,7 @@ const usePostProject = () => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ title, description, image, github }),
-      }).then((res) => res.json()).then((data) => console.log(data));
+      })
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
