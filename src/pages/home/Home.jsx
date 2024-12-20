@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <div className="flex flex-col items-center w-screen min-w-screen">
       <Header />
-      <main className="flex flex-col w-full">
+      <main className="flex flex-col w-full space-y-16">
         <LandingPage />
         <Journey />
         <ProjectSection />

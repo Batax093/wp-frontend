@@ -46,7 +46,7 @@ const SkillsSection = () => {
   return (
     <div
       id="skills"
-      className="w-full h-screen flex justify-center items-center py-16 sm:max-h-screen md:py-32 lg:py-48">
+      className="w-full flex justify-center items-center">
       {/* Skills Submission Modal */}
       <dialog
         id="skill_modal"
@@ -86,7 +86,7 @@ const SkillsSection = () => {
       {/* Display Skills */}
       <div
         id="lol"
-        className="flex flex-col sm:grid sm:grid-cols-2 md:grid md:grid-cols-2 xl:flex-row justify-around mt-20 gap-6 space-y-10 md:space-y-0 md:space-x-10 sm:justify-center sm:items-center max-h-screen">
+        className="flex flex-col sm:grid sm:grid-cols-2 md:grid md:grid-cols-2 xl:flex-row justify-around mt-20 space-y-10 md:space-y-0 md:space-x-10 sm:justify-center sm:items-center max-h-full gap-6">
         <div className="flex items-center justify-center text-center">
           {authUser && (
             <div className="flex justify-center items-center p-10 sm:p-2 md:p-8">
@@ -111,7 +111,7 @@ const SkillsSection = () => {
               key={index}
               className="parallax-element flex flex-col md:flex-row justify-around mt-20 space-y-10 md:space-y-0 md:space-x-10 items-center">
               <div className="pt-10 card bg-white w-72 md:w-96 shadow-xl flex items-center justify-center transform transition-transform duration-300 hover:scale-105">
-                <figure className="overflow-hidden">
+                <figure>
                   <img
                     src={skill.icon}
                     alt={skill.name}
