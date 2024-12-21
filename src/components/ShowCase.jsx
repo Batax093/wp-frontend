@@ -34,7 +34,7 @@ const ShowCase = () => {
           </div>
           <div className="flex justify-center">
             <a
-              href="../../public/file/Resume.pdf"
+              href="../../public/file/Resume-Fredrik.pdf"
               download="Resume.pdf"
               className="mt-2 text-black py-4 px-8 text-lg hover:shadow-2xl transition-shadow duration-300 rounded-full"
               >
