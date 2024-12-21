@@ -14,7 +14,7 @@ const ShowCase = () => {
             <img
               src="DSC04673.JPG"
               alt="Photo"
-              className="max-w-full h-full rounded-3xl shadow-lg"
+              className="max-w-full h-full rounded-lg shadow-xl"
             />
           </div>
         </Parallax>

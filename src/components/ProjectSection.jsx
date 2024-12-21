@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import useDeleteProject from "../hooks/useDeleteProject";
 import convertToBase64 from "../utils/convert64base";
 import { useAuthContext } from "../context/AuthContext";
+import { Parallax } from "react-scroll-parallax";
 
 const ProjectSection = () => {
   const { loading: getLoading, projects, getProjects } = useGetProjects();
@@ -132,10 +133,14 @@ const ProjectSection = () => {
           </div>
         ) : (
           projects.map((project, index) => (
-            <div
+            <Parallax
               key={index}
+              speed={15}
+              opacity={[-2, 4]}
+              easing="easeOutQuad"
+              scale={[0.75, 1]}
               className="parallax-element flex flex-col md:flex-row justify-around mt-20 space-y-10 md:space-y-0 md:space-x-10 items-center">
-              <div className="card bg-white w-72 md:w-96 shadow-xl flex items-center justify-center transform transition-transform box duration-300 hover:scale-105">
+              <div className="card bg-white w-72 mt-20 md:w-96 shadow-xl flex items-center justify-center transform transition-transform box duration-300 hover:scale-105">
                 <figure>
                   <img
                     className="w-full h-full object-fill"
@@ -169,7 +174,7 @@ const ProjectSection = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </Parallax>
           ))
         )}
       </div>
