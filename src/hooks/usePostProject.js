@@ -7,7 +7,7 @@ const usePostProject = () => {
   const { token } = useAuthContext();
   const API_URL = import.meta.env.VITE_API_URL
 
-  const postProject = async ({ title, description, image, github }, resetForm, callback) => {
+  const postProject = async ({ title, description, image, github, tech }, resetForm, callback) => {
     setLoading(true);
     try {
       const res = await fetch(`${API_URL}api/projects/add-project`, {
@@ -16,7 +16,7 @@ const usePostProject = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ title, description, image, github }),
+        body: JSON.stringify({ title, description, image, github, tech }),
       })
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);

@@ -12,11 +12,11 @@ const ProjectSection = () => {
   const { loading: deleteLoading, deleteProject } = useDeleteProject();
   const { authUser } = useAuthContext();
 
-  // Form state for adding new projects
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [github, setGithub] = useState("");
+  const [tech, setTech] = useState("");
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -26,7 +26,7 @@ const ProjectSection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const projectData = { title, description, image, github };
+    const projectData = { title, description, image, github, tech };
     await postProject(projectData, async () => {
       resetForm();
       document.getElementById("project_modal").close();
@@ -40,6 +40,7 @@ const ProjectSection = () => {
     setDescription("");
     setImage(null);
     setGithub("");
+    setTech("");
   };
 
   const handleDelete = async (projecttitle) => {
@@ -80,6 +81,13 @@ const ProjectSection = () => {
             className="input input-bordered w-full bg-white"
             value={github}
             onChange={(e) => setGithub(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Project Technologies"
+            className="input input-bordered w-full bg-white"
+            value={tech}
+            onChange={(e) => setTech(e.target.value)}
           />
           <textarea
             placeholder="Project Description"
@@ -138,6 +146,7 @@ const ProjectSection = () => {
                 <div className="flex justify-around">
                   <div className="card-body">
                     <h2 className="card-title text-black">{project.title}</h2>
+                    <h3 className="card-title text-bluePastel">{project.tech}</h3>
                     <p className="text-black">{project.description}</p>
                     <div className="card-actions justify-around">
                       <a
